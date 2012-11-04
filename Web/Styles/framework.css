@@ -55,15 +55,15 @@
         }
 
     .vtjToolbar .display {
-        background: transparent url(../images/icons.png) no-repeat 0 0;
+        background: transparent url(../Images/icons.png) no-repeat 0 0;
     }
 
     .vtjToolbar .input {
-        background: transparent url(../images/icons.png) no-repeat -32px 0;
+        background: transparent url(../Images/icons.png) no-repeat -32px 0;
     }
 
     .vtjToolbar .audio {
-        background: transparent url(../images/icons.png) no-repeat -64px 0;
+        background: transparent url(../Images/icons.png) no-repeat -64px 0;
     }
 
 .popup {
