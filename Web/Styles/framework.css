@@ -1,0 +1,136 @@
+﻿.vtjGame {
+    font-family: Segoe UI, Sans-Serif;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 40px;
+    background: lightyellow;
+    overflow: hidden;
+}
+
+    .vtjGame canvas {
+        position: absolute;
+        background: #000;
+    }
+
+.resourceLoadProgress {
+    background: #0cc;
+    height: 40px;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.vtjToolbar {
+    font-family: Segoe UI, Sans-Serif;
+    font-size: 30px;
+    height: 40px;
+    line-height: 40px;
+    background: #404040;
+    color: #fff;
+    padding: 0 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+    .vtjToolbar .menu {
+        float: right;
+        width: 32px;
+        height: 32px;
+        background: blue;
+        margin: 4px;
+        cursor: pointer;
+        outline: 0;
+    }
+
+        .vtjToolbar .menu.selected {
+            background-color: #A0A0A0;
+            border: solid 4px #A0A0A0;
+            margin: 0;
+            cursor: default;
+        }
+
+    .vtjToolbar .display {
+        background: transparent url(../images/icons.png) no-repeat 0 0;
+    }
+
+    .vtjToolbar .input {
+        background: transparent url(../images/icons.png) no-repeat -32px 0;
+    }
+
+    .vtjToolbar .audio {
+        background: transparent url(../images/icons.png) no-repeat -64px 0;
+    }
+
+.popup {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    background-color: #A0A0A0;
+    font-size: 15px;
+    padding: 20px;
+    line-height: 25px;
+    cursor: default;
+    display: none;
+    text-decoration: none;
+    outline: 0;
+    color: #fff;
+}
+
+.menu.selected .popup {
+    display: block;
+}
+
+.popup h1, .popup h2 {
+    margin: 0;
+    font-weight: normal;
+}
+
+.popup h1 {
+    margin: 0 0 20px 0;
+    color: purple;
+    text-transform: uppercase;
+}
+
+.popup h2 {
+    margin: 10px 0 0 0;
+}
+
+.popup span {
+    margin: 0 10px;
+    color: #404040;
+    cursor: pointer;
+}
+
+    .popup span.selected {
+        color: White;
+    }
+
+    .popup span:hover {
+        color: Yellow;
+    }
+
+.button.cancel {
+    background: #404040;
+}
+
+.button.ok {
+    background: DarkGreen;
+}
+
+.button:hover {
+    color: Yellow;
+}
+
+.button {
+    display: inline-block;
+    font-size: 1.2em;
+    margin: 20px 10px 0 0;
+    padding: 7px 20px;
+    cursor: pointer;
+    color: #fff;
+}
