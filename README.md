@@ -1,10 +1,10 @@
 BladeGame
 =========
 
-This repository will contain all of the code for a series of articles I'm writing on HTML5 game development using the Blade C# to JavaScript compiler.
+This repository will contain all of the code for a series of articles I'm writing on HTML5 game development using the [Blade C# to JavaScript compiler](https://github.com/vannatech/blade).
 
 ## Demos ##
-Demo pages coming soon
+You can access the demos [here](http://ventajou.github.com/BladeGame/Web/).
 
 ## Where can I find the articles? ##
 Nowhere yet, the first one should hopefully be online soon.
@@ -16,10 +16,10 @@ The code is organized in folders, in the following manner:
 
 - Framework: contains the source of a sample game framework or engine with the common components used by the various demos and games.
 - Demos: gathers all of the various demos and sample games that will be created to illustrate the various topics covered in the articles.
-- Web: a simple website used to host the demos.
+- Web: the simple website used to host the [demos](http://ventajou.github.com/BladeGame/Web/).
 
 ## Building the code ##
-To build the code, you will need a Windows computer with the .NET Framework v4.0 or better. In addition, you will need to install the [Blade compiler](https://github.com/vannatech/blade "Blade compiler").
+To build the code, you will need a Windows computer with the .NET Framework v4.0 or better. In addition, you will need to install the [Blade compiler](https://github.com/vannatech/blade).
 
 
 These should be enough for you to build from the command line, using the MSBuild tool:
