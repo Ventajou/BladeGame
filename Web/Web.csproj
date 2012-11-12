@@ -61,14 +61,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="default.html" />
+    <Content Include="Demos\1\index.html" />
     <Content Include="Demos\1\Ventajou.Demos.1.js" />
     <Content Include="Images\icons.png" />
+    <Content Include="index.html" />
     <Content Include="Scripts\blade.js" />
     <Content Include="Scripts\Ventajou.Gaming.js" />
     <Content Include="Styles\default.css" />
     <Content Include="Styles\framework.css" />
-    <Content Include="Demos\1\default.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
