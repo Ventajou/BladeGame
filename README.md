@@ -7,7 +7,9 @@ This repository will contain all of the code for a series of articles I'm writin
 You can access the demos [here](http://ventajou.github.com/BladeGame/Web/).
 
 ## Where can I find the articles? ##
-Nowhere yet, the first one should hopefully be online soon.
+On BuildNewGames:
+
+* [Compiling to JavaScript: What, Why, and How?](http://buildnewgames.com/compiling-to-javascript/)
 
 ## Code organization ##
 The master branch will contain the most up to date code, while there will be a branch for each article in the series. For example, the article\_1 branch will contain all of the code pertaining to the corresponding article. As each article will build on top of the previous one, so will the branches. For example, article\_2 will be article\_1 plus new or modified code.
@@ -21,6 +23,7 @@ The code is organized in folders, in the following manner:
 ## Building the code ##
 To build the code, you will need a Windows computer with the .NET Framework v4.0 or better. In addition, you will need to install the [Blade compiler](https://github.com/vannatech/blade).
 
+**Note: For the time being, the Blade installer requires Visual Studio 2010 to be installed, I'm working with the author to address that.**
 
 These should be enough for you to build from the command line, using the MSBuild tool:
 
