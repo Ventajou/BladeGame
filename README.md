@@ -21,9 +21,7 @@ The code is organized in folders, in the following manner:
 - Web: the simple website used to host the [demos](http://ventajou.github.com/BladeGame/Web/).
 
 ## Building the code ##
-To build the code, you will need a Windows computer with the .NET Framework v4.0 or better. In addition, you will need to install the [Blade compiler](https://github.com/vannatech/blade).
-
-**Note: For the time being, the Blade installer requires Visual Studio 2010 to be installed, I'm working with the author to address that.**
+To build the code, you will need a Windows computer with the .NET Framework v4.0 or better. In addition, you will need to install the [Blade compiler](https://github.com/vannatech/blade/tree/NSIS_installer/release/latest).
 
 These should be enough for you to build from the command line, using the MSBuild tool:
 
