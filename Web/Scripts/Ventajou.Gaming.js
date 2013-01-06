@@ -138,9 +138,6 @@ Ventajou.Gaming.Config.UI.Menu = (function() {
                 setting.persist();
             }
         }
-        if (localStorage !== null) {
-            localStorage.setItem('GameSettings', JSON.stringify(Ventajou.Gaming.Game.settings));
-        }
         this.changed(this._name);
     };
     p.contains = function (parent, child) {
@@ -222,7 +219,7 @@ Ventajou.Gaming.Game = (function() {
         title.innerHTML = this.get_Name();
         toolbar.appendChild(title);
         if (localStorage !== null) {
-            var s = JSON.parse(localStorage.getItem('GameSettings'));
+            var s = JSON.parse(localStorage.getItem(this.get_SettingsKey()));
             if (s !== null) {
                 Ventajou.Gaming.Game.settings = s;
             }
@@ -250,12 +247,19 @@ Ventajou.Gaming.Game = (function() {
     p._currentScene = null;
     p.wrapper = null;
     p.canvas = null;
+    p.requestAnimFrame = null;
     p.$Name = null;
     p.get_Name = function() {
         return this.$Name;
     };
     p.set_Name = function(value) {
         this.$Name = value;
+    };
+    p.get_SettingsKey = function() {
+        return this.get_Name() + '.Settings';
+    };
+    p.requestAnimationFrameFallback = function (a) {
+        setTimeout(a, 1000 / 60);
     };
     p.loadScene = function (scene) {
         if (this._currentScene !== null) {
@@ -268,6 +272,9 @@ Ventajou.Gaming.Game = (function() {
         return [new Ventajou.Gaming.Config.UI.Menu('Display', 'display', [new Ventajou.Gaming.Config.Settings.FullScreenSetting(), new Ventajou.Gaming.Config.Settings.ResolutionSetting(), new Ventajou.Gaming.Config.Settings.StretchToWindowSetting()])];
     };
     p.menuChanged = function (menuName) {
+        if (localStorage !== null) {
+            localStorage.setItem(this.get_SettingsKey(), JSON.stringify(Ventajou.Gaming.Game.settings));
+        }
         switch (menuName) {
             case 'Display':
                 this.refresh();
@@ -338,6 +345,15 @@ Ventajou.Gaming.Scene = (function() {
     var p = Scene.prototype;
     p.game = null;
     p.start = function () {
+        this.onStart();
+        setInterval((Blade.del(this, function() {
+            this.update();
+        })), 1000 / 60);
+    };
+    p.update = function () {
+        this.refresh();
+    };
+    p.onStart = function () {
     };
     p.refresh = function () {
     };
@@ -482,8 +498,11 @@ Ventajou.Gaming.Config.UI.ArraySetting = (function() {
 Ventajou.Gaming.Config.Settings.ResolutionSetting = (function() {
     Blade.derive(ResolutionSetting, Ventajou.Gaming.Config.UI.ArraySetting);
     var $base = Ventajou.Gaming.Config.UI.ArraySetting.prototype;
-    function ResolutionSetting() {
+    function ResolutionSetting(resolutions) {
         $base.constructor.call(this);
+        if (resolutions) {
+            Ventajou.Gaming.Config.Settings.ResolutionSetting._values = resolutions;
+        }
     }
     var p = ResolutionSetting.prototype;
     p.get_values = function() {

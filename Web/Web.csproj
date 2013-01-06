@@ -61,13 +61,24 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bootstrap\css\bootstrap-responsive.css" />
+    <Content Include="bootstrap\css\bootstrap-responsive.min.css" />
+    <Content Include="bootstrap\css\bootstrap.css" />
+    <Content Include="bootstrap\css\bootstrap.min.css" />
+    <Content Include="bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="bootstrap\js\bootstrap.js" />
+    <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="Demos\1\index.html" />
     <Content Include="Demos\1\Ventajou.Demos.1.js" />
+    <Content Include="Demos\2\index.html" />
+    <Content Include="Demos\2\Ventajou.Demos.2.js" />
     <Content Include="Images\icons.png" />
     <Content Include="index.html" />
     <Content Include="Scripts\blade.js" />
+    <Content Include="Scripts\compat.js" />
+    <Content Include="Scripts\jquery-1.8.3.min.js" />
     <Content Include="Scripts\Ventajou.Gaming.js" />
-    <Content Include="Styles\default.css" />
     <Content Include="Styles\framework.css" />
   </ItemGroup>
   <ItemGroup>

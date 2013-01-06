@@ -13,6 +13,11 @@
         position: absolute;
         background: #000;
     }
+    
+    .vtjGame a:hover
+    {
+        text-decoration: none;
+    }
 
 .resourceLoadProgress {
     background: #0cc;
@@ -36,6 +41,12 @@
     left: 0;
     right: 0;
 }
+
+    .vtjToolbar a:hover
+    {
+        text-decoration: none;
+        color: #fff;
+    }
 
     .vtjToolbar .menu {
         float: right;

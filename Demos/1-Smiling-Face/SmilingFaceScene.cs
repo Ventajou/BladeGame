@@ -34,7 +34,7 @@ namespace Ventajou.Demos
             context.stroke();
         }
 
-        public override void start()
+        public override void onStart()
         {
         }
     }

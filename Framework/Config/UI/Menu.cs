@@ -169,12 +169,6 @@ namespace Ventajou.Gaming.Config.UI
                 foreach (var setting in _settings) setting.persist();
             }
 
-            // If local storage is available, persist the settings in there
-            if (window.localStorage != null)
-            {
-                window.localStorage.setItem("GameSettings", window.JSON.stringify(Game.settings));
-            }
-
             // Trigger the changed event so the game can account for the settings change.
             changed(_name);
         }

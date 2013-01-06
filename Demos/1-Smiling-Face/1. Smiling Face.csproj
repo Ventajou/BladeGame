@@ -51,6 +51,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Blade\Blade.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y $(TargetDir)$(TargetName).js $(SolutionDir)\Web\Demos\1\</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y $(TargetDir)$(TargetName).js $(SolutionDir)Web\Demos\1\</PostBuildEvent>
   </PropertyGroup>
 </Project>

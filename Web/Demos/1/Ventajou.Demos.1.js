@@ -44,7 +44,7 @@ Ventajou.Demos.SmilingFaceScene = (function() {
         context.fill();
         context.stroke();
     };
-    p.start = function () {
+    p.onStart = function () {
     };
     Blade.impl(SmilingFaceScene, 'IDisposable');
     return SmilingFaceScene;

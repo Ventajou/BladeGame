@@ -25,6 +25,11 @@ namespace Ventajou.Gaming.Config.Settings
 
         public override string name { get { return "Resolution"; } }
 
+        public ResolutionSetting(Resolution[] resolutions = null)
+        {
+            if ((dynamic)resolutions) _values = resolutions;
+        }
+
         public override void load()
         {
             var r = (dynamic)Game.settings.resolution || Resolution.auto;

@@ -2,6 +2,7 @@
 using Ventajou.Gaming.Config;
 using Ventajou.Gaming.Config.UI;
 using Ventajou.Gaming.Config.Settings;
+using System;
 
 namespace Ventajou.Gaming
 {
@@ -31,12 +32,21 @@ namespace Ventajou.Gaming
         /// The game configuration, kept in local storage.
         /// </summary>
         public static GameSettings settings;
+
+        public Action<Action> requestAnimFrame;
         #endregion
 
         /// <summary>
         /// The game's name
         /// </summary>
         protected abstract string Name { get; }
+
+        protected string SettingsKey { get { return Name + ".Settings"; } }
+
+        public void requestAnimationFrameFallback(Action a)
+        {
+            window.setTimeout(a, 1000 / 60);
+        }
 
         public Game(HTMLElement element)
         {
@@ -60,7 +70,7 @@ namespace Ventajou.Gaming
 
             if (window.localStorage != null)
             {
-                var s = (GameSettings)window.JSON.parse(window.localStorage.getItem("GameSettings"));
+                var s = (GameSettings)window.JSON.parse(window.localStorage.getItem(SettingsKey));
                 if (s != null) settings = s;
             }
 
@@ -121,6 +131,12 @@ namespace Ventajou.Gaming
 
         private void menuChanged(string menuName)
         {
+            // If local storage is available, persist the settings in there
+            if (window.localStorage != null)
+            {
+                window.localStorage.setItem(SettingsKey, window.JSON.stringify(Game.settings));
+            }
+
             switch (menuName)
             {
                 case "Display":

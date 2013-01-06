@@ -21,10 +21,22 @@ namespace Ventajou.Gaming
             this.game = game;
         }
 
+        public void start()
+        {
+            onStart();
+            window.requestAnimationFrame((Action)(() => { update(); }));
+        }
+
+        public void update()
+        {
+            window.requestAnimationFrame((Action)(() => { update(); }));
+            refresh();
+        }
+
         /// <summary>
         /// Called by the game after the scene is loaded.
         /// </summary>
-        public abstract void start();    
+        public abstract void onStart();    
 
         /// <summary>
         /// Called by the game when the canvas may need to be repainted.
