@@ -73,6 +73,14 @@
     <Content Include="Demos\1\Ventajou.Demos.1.js" />
     <Content Include="Demos\2\index.html" />
     <Content Include="Demos\2\Ventajou.Demos.2.js" />
+    <Content Include="Demos\3\index.html" />
+    <Content Include="Demos\3\tile1.png" />
+    <Content Include="Demos\3\tile2.png" />
+    <Content Include="Demos\3\tile3.png" />
+    <Content Include="Demos\3\Ventajou.Demos.3.js" />
+    <Content Include="Demos\4\index.html" />
+    <Content Include="Demos\4\sprite.png" />
+    <Content Include="Demos\4\Ventajou.Demos.4.js" />
     <Content Include="Images\icons.png" />
     <Content Include="index.html" />
     <Content Include="Scripts\blade.js" />

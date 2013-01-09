@@ -41,7 +41,9 @@ namespace Ventajou.Gaming
         /// </summary>
         protected abstract string Name { get; }
 
-        protected string SettingsKey { get { return Name + ".Settings"; } }
+        protected virtual GameSettings defaultSettings { get { return new GameSettings(); } }
+
+        protected string settingsKey { get { return Name + ".Settings"; } }
 
         public void requestAnimationFrameFallback(Action a)
         {
@@ -70,11 +72,11 @@ namespace Ventajou.Gaming
 
             if (window.localStorage != null)
             {
-                var s = (GameSettings)window.JSON.parse(window.localStorage.getItem(SettingsKey));
+                var s = (GameSettings)window.JSON.parse(window.localStorage.getItem(settingsKey));
                 if (s != null) settings = s;
             }
 
-            if (!(dynamic)settings) settings = new GameSettings();
+            if (!(dynamic)settings) settings = defaultSettings;
 
             window.addEventListener("resize", (e) => { refresh(); }, false);
 
@@ -134,7 +136,7 @@ namespace Ventajou.Gaming
             // If local storage is available, persist the settings in there
             if (window.localStorage != null)
             {
-                window.localStorage.setItem(SettingsKey, window.JSON.stringify(Game.settings));
+                window.localStorage.setItem(settingsKey, window.JSON.stringify(Game.settings));
             }
 
             switch (menuName)

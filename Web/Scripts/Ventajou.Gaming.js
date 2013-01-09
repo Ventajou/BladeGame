@@ -219,13 +219,13 @@ Ventajou.Gaming.Game = (function() {
         title.innerHTML = this.get_Name();
         toolbar.appendChild(title);
         if (localStorage !== null) {
-            var s = JSON.parse(localStorage.getItem(this.get_SettingsKey()));
+            var s = JSON.parse(localStorage.getItem(this.get_settingsKey()));
             if (s !== null) {
                 Ventajou.Gaming.Game.settings = s;
             }
         }
         if (!Ventajou.Gaming.Game.settings) {
-            Ventajou.Gaming.Game.settings = {};
+            Ventajou.Gaming.Game.settings = this.get_defaultSettings();
         }
         addEventListener('resize', Blade.del(this, function(e) {
             this.refresh();
@@ -255,7 +255,10 @@ Ventajou.Gaming.Game = (function() {
     p.set_Name = function(value) {
         this.$Name = value;
     };
-    p.get_SettingsKey = function() {
+    p.get_defaultSettings = function() {
+        return {};
+    };
+    p.get_settingsKey = function() {
         return this.get_Name() + '.Settings';
     };
     p.requestAnimationFrameFallback = function (a) {
@@ -273,7 +276,7 @@ Ventajou.Gaming.Game = (function() {
     };
     p.menuChanged = function (menuName) {
         if (localStorage !== null) {
-            localStorage.setItem(this.get_SettingsKey(), JSON.stringify(Ventajou.Gaming.Game.settings));
+            localStorage.setItem(this.get_settingsKey(), JSON.stringify(Ventajou.Gaming.Game.settings));
         }
         switch (menuName) {
             case 'Display':
@@ -346,11 +349,14 @@ Ventajou.Gaming.Scene = (function() {
     p.game = null;
     p.start = function () {
         this.onStart();
-        setInterval((Blade.del(this, function() {
+        requestAnimationFrame((Blade.del(this, function() {
             this.update();
-        })), 1000 / 60);
+        })));
     };
     p.update = function () {
+        requestAnimationFrame((Blade.del(this, function() {
+            this.update();
+        })));
         this.refresh();
     };
     p.onStart = function () {

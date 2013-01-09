@@ -13,8 +13,15 @@ Ventajou.Demos.BouncingBallGame = (function() {
     p.get_Name = function() {
         return 'Bouncing Ball';
     };
+    p.get_defaultSettings = function() {
+        return {
+            resolution: Ventajou.Gaming.Config.Resolution.qvga,
+            fitToContainer: true,
+            fullScreen: false
+        };
+    };
     p.buildMenus = function () {
-        return [new Ventajou.Gaming.Config.UI.Menu('Display', 'display', [new Ventajou.Gaming.Config.Settings.FullScreenSetting(), new Ventajou.Gaming.Config.Settings.ResolutionSetting([Ventajou.Gaming.Config.Resolution.qvga]), new Ventajou.Gaming.Config.Settings.StretchToWindowSetting()])];
+        return [new Ventajou.Gaming.Config.UI.Menu('Display', 'display', [new Ventajou.Gaming.Config.Settings.FullScreenSetting(), new Ventajou.Gaming.Config.Settings.StretchToWindowSetting()])];
     };
     return BouncingBallGame;
 })();

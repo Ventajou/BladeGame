@@ -53,11 +53,15 @@
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
+            <div style="display: none">
+                <img id="tile1" src="tile1.png" /><img id="tile2" src="tile2.png" /><img id="tile3"
+                    src="tile3.png" />
+            </div>
             <div id="gameWrapper" class="offset1 span6">
             </div>
             <div class="span4">
                 <h2>
-                    Bouncing ball</h2>
+                    Large map</h2>
                 <p>
                     Here we simulate the inclusion of a game on a site with a fluid layout. The area
                     available to the game will vary according to the size of the browser window or the
@@ -81,10 +85,10 @@
     <script src="../../Scripts/compat.js" type="text/javascript"></script>
     <script src="../../Scripts/blade.js" type="text/javascript"></script>
     <script src="../../Scripts/Ventajou.Gaming.js" type="text/javascript"></script>
-    <script src="Ventajou.Demos.2.js" type="text/javascript"></script>
+    <script src="Ventajou.Demos.3.js" type="text/javascript"></script>
     <script type="text/javascript">
         window.onload = function () {
-            var demo = new Ventajou.Demos.BouncingBallGame(document.getElementById('gameWrapper'));
+            var demo = new Ventajou.Demos.LargeMapGame(document.getElementById('gameWrapper'));
         };
     </script>
 </body>

@@ -2,17 +2,17 @@
 using System.Dom;
 using System.Html;
 using Ventajou.Gaming;
+using Ventajou.Gaming.Config;
 using Ventajou.Gaming.Config.UI;
 using Ventajou.Gaming.Config.Settings;
-using Ventajou.Gaming.Config;
 
 namespace Ventajou.Demos
 {
-    public class BouncingBallGame : Game
+    public class LargeMapGame : Game
     {
         protected override string Name
         {
-            get { return "Bouncing Ball"; }
+            get { return "Large Map"; }
         }
 
         protected override GameSettings defaultSettings
@@ -21,17 +21,17 @@ namespace Ventajou.Demos
             {
                 return new GameSettings
                 {
-                    resolution = Resolution.qvga,
+                    resolution = Resolution.auto,
                     fitToContainer = true,
                     fullScreen = false
                 };
             }
         }
 
-        public BouncingBallGame(HTMLElement element)
+        public LargeMapGame(HTMLElement element)
             : base(element)
         {
-            loadScene(new BouncingBallScene(this));
+            loadScene(new LargeMapScene(this));
         }
 
         public override Menu[] buildMenus()
@@ -41,8 +41,7 @@ namespace Ventajou.Demos
 					new Menu("Display", "display", 
 						new Setting[]
 						{
-							new FullScreenSetting(),
-							new StretchToWindowSetting()
+							new FullScreenSetting()
 						})
 				};
         }
