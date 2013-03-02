@@ -52,33 +52,32 @@ Ventajou.Demos.LargeMapScene = (function() {
         this.speedX = 0.1;
         this.speedY = 0.1;
     };
-    p.refresh = function () {
+    p.onPaint = function (context) {
         var now = Date.now();
         var elapsed = now - this.lastTimeStamp;
         this.lastTimeStamp = now;
         this.x += this.speedX * elapsed;
         this.y += this.speedY * elapsed;
-        if (this.x + this.game.canvas.width >= Ventajou.Demos.LargeMapScene.mapWidth * Ventajou.Demos.LargeMapScene.tileSize) {
-            this.x = Ventajou.Demos.LargeMapScene.mapWidth * Ventajou.Demos.LargeMapScene.tileSize - this.game.canvas.width;
+        if (this.x + this.get_canvasWidth() >= Ventajou.Demos.LargeMapScene.mapWidth * Ventajou.Demos.LargeMapScene.tileSize) {
+            this.x = Ventajou.Demos.LargeMapScene.mapWidth * Ventajou.Demos.LargeMapScene.tileSize - this.get_canvasWidth();
             this.speedX *= -1;
         } else if (this.x < 0) {
             this.x = 0;
             this.speedX *= -1;
         }
-        if (this.y + this.game.canvas.height >= Ventajou.Demos.LargeMapScene.mapHeight * Ventajou.Demos.LargeMapScene.tileSize) {
-            this.y = Ventajou.Demos.LargeMapScene.mapHeight * Ventajou.Demos.LargeMapScene.tileSize - this.game.canvas.height;
+        if (this.y + this.get_canvasHeight() >= Ventajou.Demos.LargeMapScene.mapHeight * Ventajou.Demos.LargeMapScene.tileSize) {
+            this.y = Ventajou.Demos.LargeMapScene.mapHeight * Ventajou.Demos.LargeMapScene.tileSize - this.get_canvasHeight();
             this.speedY *= -1;
         } else if (this.y < 0) {
             this.y = 0;
             this.speedY *= -1;
         }
-        var context = this.game.canvas.getContext('2d');
         var tileY = Math.floor(this.y / Ventajou.Demos.LargeMapScene.tileSize);
         var cY = -(this.y % Ventajou.Demos.LargeMapScene.tileSize);
-        while (cY < this.game.canvas.height) {
+        while (cY < this.get_canvasHeight()) {
             var tileX = Math.floor(this.x / Ventajou.Demos.LargeMapScene.tileSize);
             var cX = -(this.x % Ventajou.Demos.LargeMapScene.tileSize);
-            while (cX < this.game.canvas.width) {
+            while (cX < this.get_canvasWidth()) {
                 context.drawImage(this.tiles[this.map[tileX + tileY * Ventajou.Demos.LargeMapScene.mapWidth]], cX, cY);
                 tileX++;
                 cX += Ventajou.Demos.LargeMapScene.tileSize;

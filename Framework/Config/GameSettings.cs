@@ -26,6 +26,11 @@ namespace Ventajou.Gaming.Config
         /// Defines whether the game should be displayed in full screen.
         /// </summary>
         public bool fullScreen = false;
+
+        /// <summary>
+        /// Defines the kind of filtering used by the blitting operations
+        /// </summary>
+        public bool blockyPixels = false;
         #endregion
 
         #region Input

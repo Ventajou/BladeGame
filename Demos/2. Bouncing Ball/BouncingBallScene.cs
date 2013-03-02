@@ -32,7 +32,7 @@ namespace Ventajou.Demos
             speedY = 0.1;
         }
 
-        public override void refresh()
+        public override void onPaint(CanvasRenderingContext2D context)
         {
             var now = Date.now();
             var elapsed = now - lastTimeStamp;
@@ -49,7 +49,6 @@ namespace Ventajou.Demos
                 (ballY - radius <= borderThickness && speedY < 0))
                 speedY *= -1;
 
-            var context = (CanvasRenderingContext2D)game.canvas.getContext("2d");
             context.fillStyle = "yellow";
             context.fillRect(0, 0, width, height);
             context.fillStyle = "black";

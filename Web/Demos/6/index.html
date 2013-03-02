@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>BladeGame Demos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demo site for the BladeGame library">
+    <meta name="author" content="André Rieussec">
+    <link href="../../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../../bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+    <link href="../../Styles/framework.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/demo.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
+                    class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </a><a class="brand" href="../../index.html">BladeGame</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="active"><a href="../../index.html">Home</a></li>
+                        <li><a href="https://github.com/ventajou/bladegame/">GitHub</a></li>
+                        <li><a href="http://www.ventajou.com">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div id="gameWrapper" class="offset1 span6">
+            </div>
+            <div class="span4">
+                <h2>
+                    Break time</h2>
+                <p>
+                    When our games run in a desktop browser, we can expect our players to switch to
+                    a different window every once in a while. When they do, they will appreciate to
+                    see the game automatically pause itself. Not only will this behavior increase the
+                    chances that the player will return to the game; it will also keep from eating CPU
+                    cycles and eventually battery life.</p>
+                <p>
+                    By properly separating the code, we can also ensure that we avoid artifacts on the
+                    screen. The trick being to refresh the display while not updating the state of the
+                    game.
+                </p>
+            </div>
+        </div>
+        <hr>
+        <footer>
+            <p>
+                &copy; André Rieussec 2012-2013</p>
+        </footer>
+    </div>
+    <script src="../../Scripts/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/compat.js" type="text/javascript"></script>
+    <script src="../../Scripts/blade.js" type="text/javascript"></script>
+    <script src="../../Scripts/Ventajou.Gaming.js" type="text/javascript"></script>
+    <script src="Ventajou.Demos.6.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var demo = new Ventajou.Demos.BreakTimeGame(document.getElementById('gameWrapper'));
+        };
+    </script>
+</body>
+</html>

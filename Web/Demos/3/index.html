@@ -6,33 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Demo site for the BladeGame library">
     <meta name="author" content="André Rieussec">
-    <link href="../../bootstrap/css/bootstrap.css" rel="stylesheet">
-    <style>
-        body
-        {
-            padding-top: 60px;
-        }
-    </style>
-    <link href="../../bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../../bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
     <link href="../../Styles/framework.css" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-        html, body
-        {
-            height: 100%;
-        }
-        
-        #gameWrapper
-        {
-            position: relative;
-            min-height: 280px;
-            height: 90%;
-        }
-        
-        .container-fluid, .row-fluid
-        {
-            height: 90%;
-        }
-    </style>
+    <link href="../assets/demo.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -40,7 +17,7 @@
             <div class="container">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
                     class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                </a><a class="brand" href="#">BladeGame</a>
+                </a><a class="brand" href="../../index.html">BladeGame</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li class="active"><a href="../../index.html">Home</a></li>
@@ -54,8 +31,8 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div style="display: none">
-                <img id="tile1" src="tile1.png" /><img id="tile2" src="tile2.png" /><img id="tile3"
-                    src="tile3.png" />
+                <img id="tile1" src="../assets/tile1.png" /><img id="tile2" src="../assets/tile2.png" /><img id="tile3"
+                    src="../assets/tile3.png" />
             </div>
             <div id="gameWrapper" class="offset1 span6">
             </div>
@@ -63,14 +40,9 @@
                 <h2>
                     Large map</h2>
                 <p>
-                    Here we simulate the inclusion of a game on a site with a fluid layout. The area
-                    available to the game will vary according to the size of the browser window or the
-                    device screen. Try resizing your browser or rotating your tablet to see the difference.</p>
-                <p>
-                    Many games are built with certain dimensions in mind. For example here our <i>game</i>
-                    uses a resolution of 320 by 240 pixels which would look very small on a high resolution
-                    screen. As long as we preserve the game's proportions, we can allow it to be resized
-                    and remain visible for all users.
+                    As opposed to the <a href="../2/index.html">bouncing ball demo</a>, this one shows how certain
+                    games can adapt to any dimensions. Here the more room we have the more map we can view, this is 
+                    perfect for strategy games for example.
                 </p>
             </div>
         </div>

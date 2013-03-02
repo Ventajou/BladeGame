@@ -45,7 +45,7 @@ Ventajou.Demos.BouncingBallScene = (function() {
         this.speedX = 0.1;
         this.speedY = 0.1;
     };
-    p.refresh = function () {
+    p.onPaint = function (context) {
         var now = Date.now();
         var elapsed = now - this.lastTimeStamp;
         this.lastTimeStamp = now;
@@ -57,7 +57,6 @@ Ventajou.Demos.BouncingBallScene = (function() {
         if ((this.ballY + Ventajou.Demos.BouncingBallScene.radius >= Ventajou.Demos.BouncingBallScene.height - Ventajou.Demos.BouncingBallScene.borderThickness && this.speedY > 0) || (this.ballY - Ventajou.Demos.BouncingBallScene.radius <= Ventajou.Demos.BouncingBallScene.borderThickness && this.speedY < 0)) {
             this.speedY *= -1;
         }
-        var context = this.game.canvas.getContext('2d');
         context.fillStyle = 'yellow';
         context.fillRect(0, 0, Ventajou.Demos.BouncingBallScene.width, Ventajou.Demos.BouncingBallScene.height);
         context.fillStyle = 'black';

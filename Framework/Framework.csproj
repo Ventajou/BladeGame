@@ -37,9 +37,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
+    <Reference Include="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Browser\Events.cs" />
+    <Compile Include="Browser\Key.cs" />
+    <Compile Include="Browser\Keyboard.cs" />
+    <Compile Include="Config\UI\KeySetting.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="Config\GameSettings.cs" />
     <Compile Include="Config\Resolution.cs" />
@@ -53,6 +58,13 @@
     <Compile Include="Config\UI\SingleChoiceSetting.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Dialog.cs" />
+    <Compile Include="UI\DialogButton.cs" />
+    <Compile Include="UI\InGame\Button.cs" />
+    <Compile Include="UI\InGame\Label.cs" />
+    <Compile Include="UI\InGame\Menu.cs" />
+    <Compile Include="UI\InGame\MenuItem.cs" />
+    <Compile Include="UI\InGame\Title.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Blade\Blade.CSharp.targets" />

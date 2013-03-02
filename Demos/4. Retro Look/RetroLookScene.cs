@@ -19,12 +19,11 @@ namespace Ventajou.Demos
         {
         }
 
-        public override void refresh()
+        public override void onPaint(CanvasRenderingContext2D context)
         {
-            var context = (CanvasRenderingContext2D)game.canvas.getContext("2d");
             context.fillStyle = "black";
-            context.fillRect(0, 0, 320, 240);
-            context.drawImage(sprite, 160, 120);
+            context.fillRect(0, 0, canvasWidth, canvasHeight);
+            context.drawImage(sprite, ((int)canvasWidth - sprite.naturalWidth) / 2, ((int)canvasHeight - sprite.naturalHeight) / 2);
         }
     }
 }

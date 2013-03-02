@@ -44,7 +44,7 @@ namespace Ventajou.Demos
             speedY = 0.1;
         }
 
-        public override void refresh()
+        public override void onPaint(CanvasRenderingContext2D context)
         {
             var now = Date.now();
             var elapsed = now - lastTimeStamp;
@@ -52,9 +52,9 @@ namespace Ventajou.Demos
             x += speedX * elapsed;
             y += speedY * elapsed;
 
-            if (x + game.canvas.width >= mapWidth * tileSize)
+            if (x + canvasWidth >= mapWidth * tileSize)
             {
-                x = mapWidth * tileSize - game.canvas.width;
+                x = mapWidth * tileSize - canvasWidth;
                 speedX *= -1;
             }
             else if (x < 0)
@@ -63,9 +63,9 @@ namespace Ventajou.Demos
                 speedX *= -1;
             }
 
-            if (y + game.canvas.height >= mapHeight * tileSize)
+            if (y + canvasHeight >= mapHeight * tileSize)
             {
-                y = mapHeight * tileSize - game.canvas.height;
+                y = mapHeight * tileSize - canvasHeight;
                 speedY *= -1;
             }
             else if (y < 0)
@@ -74,15 +74,14 @@ namespace Ventajou.Demos
                 speedY *= -1;
             }
 
-            var context = (CanvasRenderingContext2D)game.canvas.getContext("2d");
             var tileY = Math.floor(y / tileSize);
             var cY = -(y % tileSize);
 
-            while (cY < (int)game.canvas.height)
+            while (cY < (int)canvasHeight)
             {
                 var tileX = Math.floor(x / tileSize);
                 var cX = -(x % tileSize);
-                while (cX < (int)game.canvas.width)
+                while (cX < (int)canvasWidth)
                 {
                     context.drawImage(tiles[map[tileX + tileY * mapWidth]], cX, cY);
                     tileX++;

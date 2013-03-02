@@ -21,9 +21,10 @@ namespace Ventajou.Demos
             {
                 return new GameSettings
                 {
-                    resolution = Resolution.qvga,
+                    resolution = new Resolution(160, 100, "160x100"),
                     fitToContainer = true,
-                    fullScreen = false
+                    fullScreen = false,
+                    blockyPixels = true
                 };
             }
         }

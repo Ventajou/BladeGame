@@ -15,10 +15,14 @@ Ventajou.Demos.RetroLookGame = (function() {
     };
     p.get_defaultSettings = function() {
         return {
-            resolution: Ventajou.Gaming.Config.Resolution.qvga,
+            resolution: new Ventajou.Gaming.Config.Resolution(160, 100, '160x100'),
             fitToContainer: true,
-            fullScreen: false
+            fullScreen: false,
+            blockyPixels: true
         };
+    };
+    p.buildMenus = function () {
+        return [new Ventajou.Gaming.Config.UI.Menu('Display', 'display', [new Ventajou.Gaming.Config.Settings.FullScreenSetting(), new Ventajou.Gaming.Config.Settings.StretchToWindowSetting()])];
     };
     return RetroLookGame;
 })();
@@ -34,11 +38,10 @@ Ventajou.Demos.RetroLookScene = (function() {
     p.sprite = null;
     p.onStart = function () {
     };
-    p.refresh = function () {
-        var context = this.game.canvas.getContext('2d');
+    p.onPaint = function (context) {
         context.fillStyle = 'black';
-        context.fillRect(0, 0, 320, 240);
-        context.drawImage(this.sprite, 160, 120);
+        context.fillRect(0, 0, this.get_canvasWidth(), this.get_canvasHeight());
+        context.drawImage(this.sprite, (this.get_canvasWidth() - this.sprite.naturalWidth) / 2, (this.get_canvasHeight() - this.sprite.naturalHeight) / 2);
     };
     Blade.impl(RetroLookScene, 'IDisposable');
     return RetroLookScene;

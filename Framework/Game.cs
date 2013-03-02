@@ -15,6 +15,7 @@ namespace Ventajou.Gaming
         #region Private fields
         private HTMLElement _element;
         private Scene _currentScene;
+        private bool _useDoubleBufferForBlocky;
         #endregion
 
         #region Public fields
@@ -26,7 +27,14 @@ namespace Ventajou.Gaming
         /// <summary>
         /// Main canvas element for all draw operations.
         /// </summary>
-        public HTMLCanvasElement canvas;
+        internal HTMLCanvasElement canvas;
+
+        /// <summary>
+        /// Canvas element displayed to the user.
+        /// </summary>
+        internal HTMLCanvasElement displayCanvas;
+
+        public HTMLDivElement overlay;
 
         /// <summary>
         /// The game configuration, kept in local storage.
@@ -59,8 +67,15 @@ namespace Ventajou.Gaming
             wrapper.className = "vtjGame";
             element.appendChild(wrapper);
 
-            canvas = (HTMLCanvasElement)window.document.createElement("CANVAS");
-            wrapper.appendChild(canvas);
+            displayCanvas = (HTMLCanvasElement)window.document.createElement("CANVAS");
+            wrapper.appendChild(displayCanvas);
+            canvas = displayCanvas;
+            dynamic context = canvas.getContext("2d");
+            _useDoubleBufferForBlocky = true; // context.webkitImageSmoothingEnabled != window.undefined;
+
+            overlay = (HTMLDivElement)window.document.createElement("DIV");
+            overlay.className = "canvasOverlay";
+            wrapper.appendChild(overlay);
 
             var toolbar = window.document.createElement("DIV");
             toolbar.className = "vtjToolbar";
@@ -92,7 +107,14 @@ namespace Ventajou.Gaming
 
             refresh();
         }
-        
+
+        public CanvasRenderingContext2D getContext()
+        {
+            var context = (CanvasRenderingContext2D)canvas.getContext("2d");
+            setImageSmoothing(context, !settings.blockyPixels);
+            return context;
+        }
+
         /// <summary>
         /// Loads a game scene, unloading the current scene if needed.
         /// </summary>
@@ -106,6 +128,17 @@ namespace Ventajou.Gaming
 
             _currentScene = scene;
             scene.start();
+        }
+
+        internal void sceneUpdated()
+        {
+            if (canvas != displayCanvas)
+            {
+                //var context = (CanvasRenderingContext2D)displayCanvas.getContext("2d");
+                //setImageSmoothing(context, !settings.blockyPixels);
+                //context.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, displayCanvas.width, displayCanvas.height);
+                blitBuffer(canvas, displayCanvas);
+            }
         }
 
         #region Game settings management
@@ -152,6 +185,24 @@ namespace Ventajou.Gaming
         /// </summary>
         public void refresh()
         {
+            if (_useDoubleBufferForBlocky)
+            {
+                if (canvas == displayCanvas &&
+                    settings.blockyPixels &&
+                    !Resolution.equals(settings.resolution, Resolution.auto) &&
+                    settings.fitToContainer)
+                {
+                    canvas = (HTMLCanvasElement)window.document.createElement("CANVAS");
+                }
+                else if (canvas != displayCanvas &&
+                    (!settings.blockyPixels ||
+                    Resolution.equals(settings.resolution, Resolution.auto) ||
+                    !settings.fitToContainer))
+                {
+                    canvas = displayCanvas;
+                }
+            }
+
             dynamic d = window.document;
             bool isFullScreen = d.mozFullScreen || d.webkitIsFullScreen;
 
@@ -169,19 +220,16 @@ namespace Ventajou.Gaming
 
             if (Resolution.equals(settings.resolution, Resolution.auto))
             {
-                canvas.style.top = "0";
-                canvas.style.left = "0";
-                canvas.style.width = "100%";
-                canvas.style.height = "100%";
+                displayCanvas.style.top = "0";
+                displayCanvas.style.left = "0";
+                displayCanvas.style.width = "100%";
+                displayCanvas.style.height = "100%";
 
-                canvas.height = (ulong)canvas.offsetHeight;
-                canvas.width = (ulong)canvas.offsetWidth;
+                displayCanvas.height = (ulong)displayCanvas.offsetHeight;
+                displayCanvas.width = (ulong)displayCanvas.offsetWidth;
             }
             else
             {
-                canvas.width = (ulong)settings.resolution.width;
-                canvas.height = (ulong)settings.resolution.height;
-
                 var ww = wrapper.offsetWidth;
                 var wh = wrapper.offsetHeight;
 
@@ -193,31 +241,74 @@ namespace Ventajou.Gaming
 
                     if (w <= ww)
                     {
-                        canvas.style.top = "0";
-                        canvas.style.left = ((ww - w) / 2) + "px";
-                        canvas.style.width = w + "px";
-                        canvas.style.height = wh + "px";
+                        displayCanvas.style.top = "0";
+                        displayCanvas.style.left = ((ww - w) / 2) + "px";
+                        displayCanvas.style.width = w + "px";
+                        displayCanvas.style.height = wh + "px";
                     }
                     else
                     {
                         var h = ww / aspectRatio;
-                        canvas.style.top = ((wh - h) / 2) + "px";
-                        canvas.style.left = "0";
-                        canvas.style.width = ww + "px";
-                        canvas.style.height = h + "px";
+                        displayCanvas.style.top = ((wh - h) / 2) + "px";
+                        displayCanvas.style.left = "0";
+                        displayCanvas.style.width = ww + "px";
+                        displayCanvas.style.height = h + "px";
                     }
                 }
                 else
                 {
-                    canvas.style.width = settings.resolution.width + "px";
-                    canvas.style.height = settings.resolution.height + "px";
-                    canvas.style.top = ((wh - settings.resolution.height) / 2) + "px";
-                    canvas.style.left = ((ww - settings.resolution.width) / 2) + "px";
+                    displayCanvas.style.width = settings.resolution.width + "px";
+                    displayCanvas.style.height = settings.resolution.height + "px";
+                    displayCanvas.style.top = ((wh - settings.resolution.height) / 2) + "px";
+                    displayCanvas.style.left = ((ww - settings.resolution.width) / 2) + "px";
+                }
+
+                canvas.width = (ulong)settings.resolution.width;
+                canvas.height = (ulong)settings.resolution.height;
+                if (canvas != displayCanvas)
+                {
+                    displayCanvas.width = (ulong)displayCanvas.offsetWidth;
+                    displayCanvas.height = (ulong)displayCanvas.offsetHeight;
                 }
             }
 
-            if ((dynamic)_currentScene) _currentScene.refresh();
+            overlay.style.top = displayCanvas.style.top;
+            overlay.style.left = displayCanvas.style.left;
+            overlay.style.width = displayCanvas.style.width;
+            overlay.style.height = displayCanvas.style.height;
+            overlay.style.fontSize = (overlay.offsetHeight / 20) + "px";
+
+            displayCanvas.className = settings.blockyPixels ? "blockyPixels" : "";
+
+            if ((dynamic)_currentScene) _currentScene.paint();
         }
         #endregion
+
+        private void setImageSmoothing(dynamic context, bool value)
+        {
+            if (context.imageSmoothingEnabled != window.undefined) context.imageSmoothingEnabled = value;
+            else if (context.mozImageSmoothingEnabled != window.undefined) context.mozImageSmoothingEnabled = value;
+            else if (context.webkitImageSmoothingEnabled != window.undefined) context.webkitImageSmoothingEnabled = value;
+        }
+
+        private void blitBuffer(HTMLCanvasElement source, HTMLCanvasElement destination)
+        {
+            var sourceContext = (CanvasRenderingContext2D)source.getContext("2d");
+            var sourceData = sourceContext.getImageData(0, 0, source.width, source.height);
+            var destinationContext = (CanvasRenderingContext2D)destination.getContext("2d");
+            var destinationData = destinationContext.getImageData(0, 0, destination.width, destination.height);
+
+            var data = destinationData.data;
+
+            for (ulong x = 0; x < destination.width; x++)
+            {
+                for (ulong y = 0; y < destination.height; y++)
+                {
+                    data[x * 4 + y * destination.width * 4] = 0xff;
+                    data[(x * 4 + y * destination.width * 4) + 3] = 0xff;
+                }
+            }
+            destinationContext.putImageData(destinationData, 0, 0);
+        }
     }
 }
